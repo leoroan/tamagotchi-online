@@ -1,0 +1,29 @@
+# dependencias
+node_modules/
+.pnpm-store/
+
+# build
+ dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# vite / vite-plugin-pwa
+.vite/
+dev-dist/
+
+# env (NUNCA commitear llaves reales, solo .env.example)
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
