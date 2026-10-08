@@ -83,34 +83,37 @@ export const DEFAULT_CONFIG: GameConfig = {
   speed: 1,
 
   stats: {
-    // Saciedad: de 100 a 0 en ~9 h
-    hunger: { decayPerMinute: 0.18, criticalAt: 15 },
-    // Ánimo: de 100 a 0 en ~13 h
-    happiness: { decayPerMinute: 0.13, criticalAt: 15 },
-    // Energía: la maneja el ciclo de sueño
-    energy: { decayPerMinute: 0.35, criticalAt: 10 },
-    // Higiene: de 100 a 0 en ~16 h
-    hygiene: { decayPerMinute: 0.1, criticalAt: 20 },
+    // Balance pensado para "entrar 2 o 3 veces por dia y que alcance".
+    // Saciedad: de 100 a 0 en ~20 h de vigilia
+    hunger: { decayPerMinute: 0.083, criticalAt: 15 },
+    // Animo: de 100 a 0 en ~28 h
+    happiness: { decayPerMinute: 0.06, criticalAt: 15 },
+    // Energia: despierta 100 -> 0 en ~14 h; se recupera durmiendo
+    energy: { decayPerMinute: 0.12, criticalAt: 10 },
+    // Higiene: de 100 a 0 en ~30 h
+    hygiene: { decayPerMinute: 0.055, criticalAt: 20 },
     health: { decayPerMinute: 0, criticalAt: 20 },
   },
 
   sleep: {
-    energyGainPerMinute: 2.2,
+    energyGainPerMinute: 2.5,
     happinessGainPerMinute: 0.05,
-    hungerDecayMultiplier: 0.55,
-    autoWakeAfterMs: 6 * 60 * 60 * 1000,
+    hungerDecayMultiplier: 0.5,
+    autoWakeAfterMs: 4 * 60 * 60 * 1000,
     batteryLowEnergy: 15,
   },
 
   health: {
-    regenPerMinute: 0.25,
-    starvePenaltyPerMinute: 1.2,
-    filthPenaltyPerMinute: 0.6,
-    sickPenaltyPerMinute: 0.9,
-    sadPenaltyPerMinute: 0.4,
+    regenPerMinute: 0.3,
+    // Penalizaciones por abandono: totalmente descuidada muere en ~24 h.
+    starvePenaltyPerMinute: 0.35,
+    filthPenaltyPerMinute: 0.25,
+    sickPenaltyPerMinute: 0.5,
+    sadPenaltyPerMinute: 0.2,
     sickBelowHealth: 45,
     deathBelowHealth: 0,
-    graceMs: 35 * 60 * 1000,
+    // Ventana para salvarla con medicina cuando la salud llega a cero.
+    graceMs: 60 * 60 * 1000,
   },
 
   illness: {
@@ -125,11 +128,13 @@ export const DEFAULT_CONFIG: GameConfig = {
   care: {
     goodAt: 40,
     neglectAt: 25,
-    halfLifeMinutes: 180,
-    gainPerMinute: 3,
-    decayPerMinute: 2.2,
-    bondGainPerMinute: 1.5,
-    bondDecayPerMinute: 0.6,
+    halfLifeMinutes: 240,
+    gainPerMinute: 2,
+    decayPerMinute: 1,
+    // El vínculo crece sobre todo JUGANDO (+4 por sesión), no por estar quieto:
+    // por eso gana/decae lento acá.
+    bondGainPerMinute: 0.5,
+    bondDecayPerMinute: 0.05,
   },
 
   economy: { startingCoins: 30, playCoinReward: 3, careBonusPerHour: 5, medicineCost: 18 },

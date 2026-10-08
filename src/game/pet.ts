@@ -100,6 +100,18 @@ export function formatAge(ageMs: number): string {
   if (ageMs < DAY_MS) return `${Math.floor(ageMs / HOUR_MS)} h ${Math.floor((ageMs % HOUR_MS) / 60000)} min`;
   return `${Math.floor(ageMs / DAY_MS)} d ${Math.floor((ageMs % DAY_MS) / HOUR_MS)} h`;
 }
+/** Versión corta para la pantalla chica del LCD: 45M, 12H, 3D2H. */
+export function formatAgeCompact(ageMs: number): string {
+  const minutes = Math.floor(ageMs / 60000);
+  if (minutes < 60) return `${minutes}M`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}H`;
+  const days = Math.floor(hours / 24);
+  const rest = hours % 24;
+  return rest > 0 ? `${days}D${rest}H` : `${days}D`;
+}
+
+
 
 export function isDirty(state: PetState): boolean {
   return state.stats.hygiene < 40;
@@ -207,10 +219,11 @@ export function applyAction(state: PetState, action: PetAction, context: ActionC
     }
 
     const stats = applyStatDelta(state.stats, {
-      hunger: food.hunger,
+      // Sobre-alimentar no alimenta: solo hace mal. Es a proposito.
+      hunger: overfeed ? Math.round(food.hunger * 0.25) : food.hunger,
       happiness: happinessGain,
-      energy: food.energy,
-      health: food.health - (overfeed ? 4 : 0),
+      energy: overfeed ? 0 : food.energy,
+      health: overfeed ? -4 : food.health,
     });
 
     const next = startActivity(state, 'eating', now);
