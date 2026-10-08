@@ -198,6 +198,12 @@ export function applyAction(state: PetState, action: PetAction, context: ActionC
   if (action.type === 'feed') {
     const food = getFood(action.foodId);
     if (!food) return result(state, [], false, 'Esa comida no existe');
+    // El desbloqueo por estadio se valida ACA, no en la UI: la UI se puede
+    // saltear (devtools, otra pantalla, un bot), el core no.
+    const stageOrder = getStage(state.stageId).order;
+    if (food.unlockStageOrder > stageOrder) {
+      return result(state, [], false, `Esa comida es para mas adelante: ${food.name} se desbloquea al crecer`);
+    }
     const check = checkActivity(state, 'eating');
     if (!check.ok) return result(state, [], false, check.reason);
     if (food.cost > coins) return result(state, [], false, `Sin monedas: te faltan ${food.cost - coins}`);

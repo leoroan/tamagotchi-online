@@ -16,10 +16,17 @@ describe('pet.applyAction', () => {
 
   it('rechaza alimentar si no hay monedas', () => {
     const pet = makeGrownPet();
-    const result = applyAction(pet, { type: 'feed', foodId: 'sushi' }, { now: pet.updatedAt, coins: 1 });
+    const result = applyAction(pet, { type: 'feed', foodId: 'pastel' }, { now: pet.updatedAt, coins: 1 });
     expect(result.ok).toBe(false);
     expect(result.reason).toContain('Sin monedas');
     expect(result.state).toBe(pet);
+  });
+
+  it('rechaza comida de estadios futuros (el gate vive en el core, no en la UI)', () => {
+    const pet = makeGrownPet(); // child (order 2)
+    const result = applyAction(pet, { type: 'feed', foodId: 'elixir' }, { now: pet.updatedAt, coins: 999 });
+    expect(result.ok).toBe(false);
+    expect(result.reason).toContain('mas adelante');
   });
 
   it('no se puede alimentar mientras duerme (la clásica trampa del tamagotchi casero)', () => {
