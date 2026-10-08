@@ -3,7 +3,7 @@ import { DEFAULT_CONFIG } from '@/game/config';
 import { createGameLoop } from '@/game/engine';
 import { CanvasPresenter, type PresenterFrame } from '@/game/renderer';
 import { ACTIVE_SPRITES } from '@/game/renderer/sprites';
-import { isNightTime } from '@/lib/clock';
+import { isNightTime, now as clockNow } from '@/lib/clock';
 import { getScreenTheme } from '@/skins/screen';
 import { usePetStore } from '@/store/usePetStore';
 
@@ -70,7 +70,7 @@ export function useGameLoop(canvasRef: RefObject<HTMLCanvasElement | null>): voi
     };
     const onHide = () => {
       // Guardamos el instante exacto: el catch-up se mide desde acá.
-      usePetStore.setState({ lastSeenAt: Date.now() });
+      usePetStore.setState({ lastSeenAt: clockNow() });
     };
     document.addEventListener('visibilitychange', onVisible);
     window.addEventListener('pagehide', onHide);

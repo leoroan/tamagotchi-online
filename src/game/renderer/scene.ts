@@ -93,10 +93,10 @@ function drawDecor(
   const animation = animationFor(request.pet);
 
   if (animation === 'eat') {
-    // Plato + comida que va desapareciendo mordida a mordida.
-    const progress = request.pet.statusUntil ? 1 : 0;
+    // Plato con la comida adelante. (Que la comida se vaya "achicando" mordida a
+    // mordida necesita saber el progreso del estado; queda para la Fase 2.)
     scene.fillRect(cx + Math.round(size * 0.35), floorY - 1, 4, 1, dim);
-    if (progress <= 1) scene.fillRect(cx + Math.round(size * 0.35) + 1, floorY - 2, 2, 1, ink);
+    scene.fillRect(cx + Math.round(size * 0.35) + 1, floorY - 2, 2, 1, ink);
   }
   if (animation === 'play') {
     const bounce = Math.abs(Math.sin(request.gameNow / 260)) * (size * 0.55);

@@ -60,7 +60,7 @@ carcasa, y ver la mascota seguir viva cuando cerrás y volvés a abrir la pesta�
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm test           # 49 tests del motor, el render y el store
+npm test           # 56 tests del motor, el render y el store
 npm run typecheck  # TypeScript strict, sin errores
 npm run build      # bundle de producción (≈90 KB gzip hoy)
 ```
@@ -322,7 +322,7 @@ tamagotchi-online/
 │   │   │   ├── scene.ts          ← compositor de escena (fondo, decorado, HUD)
 │   │   │   ├── canvasPresenter.ts← único punto que habla con el DOM
 │   │   │   └── sprites/          ← proveedores de sprites (+ README de arte)
-│   │   └── __tests__/            ← 49 tests: sim, acciones, score, engine, render
+│   │   └── __tests__/            ← 56 tests: sim, acciones, score, engine, render
 │   ├── content/                  ← DATOS: especies, comidas, mutaciones
 │   ├── skins/
 │   │   ├── screen/               ← temas de PANTALLA (el juego)
@@ -531,9 +531,10 @@ npm test
 | `scoring.test.ts` | crecimiento por tiempo, multiplicadores de estadio y mutación, peso del cuidado, recién nacida = 0 |
 | `engine.test.ts` | pasos fijos, recorte de frames largos, alpha de interpolación |
 | `renderer.test.ts` | buffer de píxeles, fuente, composición en los 4 temas (día/noche, huevo/muerta), determinismo de frame |
+| `presenter.test.ts` | escala entera, centrado, ghosting, cambio de tema y resize (con un canvas falso: sin jsdom) |
 | `app.test.tsx` | smoke de render + integración del store (crear, alimentar, avanzar, skins, catch-up, sepultar) |
 
-**49 tests, sin jsdom, en ~300 ms.** El objetivo no es "cobertura": es que puedas
+**56 tests, sin jsdom, en ~300 ms.** El objetivo no es "cobertura": es que puedas
 cambiar el balance y el contenido sin miedo.
 
 Un test del que estoy especialmente contento es **"una mascota bien cuidada llega a

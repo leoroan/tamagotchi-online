@@ -3,7 +3,7 @@ node_modules/
 .pnpm-store/
 
 # build
- dist/
+dist/
 build/
 coverage/
 *.tsbuildinfo
