@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tamagotchi Online</title>
+    <script>
+      /*
+       * TRUCO PARA GITHUB PAGES (SPA).
+       *
+       * Pages no sabe reescribir rutas: si alguien entra a /tamagotchi-online/pet/abc
+       * busca un archivo que no existe y sirve este 404. Entonces acá guardamos la
+       * ruta pedida en el query (?/pet/abc) y volvemos a index.html, que la
+       * reinyecta con history.replaceState (ver el script en index.html).
+       *
+       * segmentCount = 1 porque el sitio vive en /<repo>/ (project page).
+       * Si algún día usás dominio propio (user.github.io), poné 0.
+       */
+      (function () {
+        var segmentCount = 1;
+        var l = window.location;
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            l.pathname.split('/').slice(0, 1 + segmentCount).join('/') +
+            '/?/' +
+            l.pathname
+              .slice(1)
+              .split('/')
+              .slice(segmentCount)
+              .join('/')
+              .replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash,
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

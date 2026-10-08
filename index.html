@@ -13,6 +13,27 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      /*
+       * Deshace el truco de public/404.html: si la URL viene como /?/pet/abc
+       * la reescribe a /pet/abc ANTES de que arranque React. Hoy no hay router
+       * (una sola pantalla), pero esto deja el terreno listo para la Fase 5
+       * (página pública de una mascota) sin dolores de cabeza en GitHub Pages.
+       */
+      (function () {
+        var l = window.location;
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (part) {
+              return part.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, '', l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
