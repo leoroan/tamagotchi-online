@@ -87,7 +87,7 @@ create policy "pets: dueño crea" on public.pets for insert with check (auth.uid
 create policy "pets: dueño actualiza" on public.pets for update using (auth.uid() = user_id);
 ```
 
-- La `anon key` es **pública por diseño**: sin sesión, RLS no devuelve nada.
+- La `publishable key` (ex `anon key`, hoy deprecada) es **pública por diseño**: sin sesión, RLS no devuelve nada.
 - La `service_role` key **jamás** en el front (saltea RLS).
 - El ranking es de lectura pública, pero **solo el score** (nunca el `state` completo).
 

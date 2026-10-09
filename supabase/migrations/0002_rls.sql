@@ -4,7 +4,7 @@
 -- Regla mental: sin política, NO hay acceso. RLS está activo por defecto en
 -- Supabase y acá se cierra del todo y se abre lo mínimo.
 --
--- Con esto, aunque alguien tenga la anon key (que es pública), NO puede leer ni
+-- Con esto, aunque alguien tenga la publishable key (que es pública), NO puede leer ni
 -- escribir mascotas de otros. La seguridad no depende de esconder la key.
 -- ============================================================================
 

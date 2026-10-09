@@ -2,7 +2,11 @@
 
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL?: string;
-  readonly VITE_SUPABASE_ANON_KEY?: string;
+  /**
+   * Clave pública de Supabase. Reemplaza a la vieja "anon key" (deprecada por
+   * Supabase): hoy se genera como "publishable key" (`sb_publishable_...`).
+   */
+  readonly VITE_SUPABASE_PUBLISHABLE_KEY?: string;
   /** Base path para GitHub Pages (ej: /tamagotchi-online/). */
   readonly VITE_BASE?: string;
 }

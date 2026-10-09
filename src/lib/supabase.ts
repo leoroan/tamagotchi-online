@@ -6,7 +6,8 @@
  *
  * Cuando llegue la Fase 4:
  *   1) `npm i @supabase/supabase-js`
- *   2) crear `.env.local` con VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY
+ *   2) crear `.env.local` con VITE_SUPABASE_URL y VITE_SUPABASE_PUBLISHABLE_KEY
+ *      (la vieja "anon key" quedó deprecada por Supabase)
  *   3) descomentar el código de abajo
  *   4) correr las migraciones de `supabase/migrations/` en el SQL editor
  *
@@ -21,11 +22,11 @@ export function isCloudEnabled(): boolean {
 }
 
 export const SUPABASE_SETUP_HINT =
-  'Fase 4 pendiente: npm i @supabase/supabase-js y configurar VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY.';
+  'Fase 4 pendiente: npm i @supabase/supabase-js y configurar VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY.';
 
 // ─── Cuando toque, el archivo queda así (dejado como referencia) ───────────────
 // import { createClient } from '@supabase/supabase-js';
-// export const supabase = createClient(cloudConfig.url, cloudConfig.anonKey, {
+// export const supabase = createClient(cloudConfig.url, cloudConfig.publishableKey, {
 //   auth: { persistSession: true, autoRefreshToken: true },
 // });
 //

@@ -76,11 +76,12 @@ Ese par de scripts ya está en el repo y es la técnica estándar (`spa-github-p
 |---|---|---|
 | `VITE_BASE` | build de Pages | workflow |
 | `VITE_SUPABASE_URL` | Fase 4 | **Secret** del repo + workflow |
-| `VITE_SUPABASE_ANON_KEY` | Fase 4 | **Secret** del repo + workflow |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Fase 4 | **Secret** del repo + workflow |
 
 Reglas:
-- Todo lo `VITE_*` **queda en el bundle**: son valores públicos. La anon key lo es por
-  diseño (RLS protege los datos).
+- Todo lo `VITE_*` **queda en el bundle**: son valores públicos. La publishable key lo es por
+  diseño (RLS protege los datos). Supabase **deprecó** la vieja `anon key`: hoy se usa la
+  publishable key (`sb_publishable_...`).
 - `SUPABASE_SERVICE_ROLE_KEY` **nunca** en el front ni en un `VITE_*`.
 - Para desarrollo local: `.env.local` (ignorado por git). Plantilla en `.env.example`.
 

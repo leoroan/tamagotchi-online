@@ -567,8 +567,9 @@ sección anterior).
 
 ### Variables de entorno
 - `VITE_BASE`: solo para el build de Pages (lo setea el workflow).
-- `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`: Fase 4, van como **Secrets** del
-  repo y se inyectan en el build. La anon key es pública por diseño (RLS protege);
+- `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY`: Fase 4, van como **Secrets** del
+  repo y se inyectan en el build. La publishable key es pública por diseño (RLS protege);
+  Supabase **deprecó** la vieja `anon key`, así que no la uses.
   la `service_role` **jamás** va al front.
 
 ---
